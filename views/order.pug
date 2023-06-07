@@ -1,0 +1,48 @@
+extends template
+
+block content
+    main
+        #loginForm.container
+            if (message != null)
+                if (message === "Please fill in all fields!")
+                    div.alert.alert-danger.text-center
+                        p #{message}
+                if (message === "Please use a valid email!")
+                    div.alert.alert-danger.text-center
+                        p #{message}
+
+            form(action='order', method='post')
+                h1.h3.mb-3.fw-normal.text-center Order
+                .mb-3
+                    label.form-label(for='name') Name
+                    input#name.form-control(type='text', aria-label='default input example', name='name')
+                .mb-3
+                    label.form-label(for='exampleInputEmail1') Email address
+                    input#exampleInputEmail1.form-control(type='email', name='username', aria-describedby='emailHelp')
+                .mb-3
+                    label.form-label(for='container1') Juice
+                    select#container1.form-select.container(name='juice', aria-label='Default select example')
+                        option(selected='') Choose a juice...
+                        option(value='Lemonade') Lemonade
+                        option(value='Pink Lemonade') Pink Lemonade
+                        option(value='Orange Juice') Orange Juice
+                .mb-3
+                    label.form-label(for='container2') Sweetener
+                    select#container2.form-select.container(name='sweetener', aria-label='Default select example')
+                        option(selected='') Choose a sweetener...
+                        option(value='Sugar') Sugar
+                        option(value='Honey') Honey
+                        option(value='Stevia') Stevia
+                        option(value='No sweetener') No sweetener
+                .mb-3
+                    label.form-label(for='container3') Quantity
+                    select#container3.form-select.container(name='quantity', aria-label='Default select example')
+                        option(selected='') Choose how many you would like...
+                        option(value='1') 1
+                        option(value='2') 2
+                        option(value='3') 3
+                        option(value='4') 4
+                .mb-3
+                    label.form-label(for='exampleFormControlTextarea1') Comments
+                    textarea#exampleFormControlTextarea1.form-control(name='message', rows='6')
+                button#send.btn(type='submit') Order
