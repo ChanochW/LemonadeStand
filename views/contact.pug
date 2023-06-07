@@ -1,0 +1,31 @@
+extends template
+
+block content
+    main
+        #loginForm.container
+            if (message != null)
+                if (message === "Mail Sent!")
+                    div.alert.alert-success.text-center
+                        p #{message}
+                if (message === "There was an issue sending your message. Try again.")
+                    div.alert.alert-danger.text-center
+                        p #{message}
+                if (message === "Please fill in all fields!")
+                    div.alert.alert-danger.text-center
+                        p #{message}
+                if (message === "Please use a valid email!")
+                    div.alert.alert-danger.text-center
+                        p #{message}
+
+            form(action='contact', method='post')
+                h1.h3.mb-3.fw-normal.text-center Contact Us
+                .mb-3
+                    label.form-label(for='name') Name
+                    input#name.form-control(type='text', aria-label='default input example', name='name')
+                .mb-3
+                    label.form-label(for='exampleInputEmail1') Email address
+                    input#exampleInputEmail1.form-control(type='email', name='username', aria-describedby='emailHelp')
+                .mb-3
+                    label.form-label(for='exampleFormControlTextarea1') Message
+                    textarea#exampleFormControlTextarea1.form-control(name='message', rows='6')
+                button#send.btn(type='submit') Send
