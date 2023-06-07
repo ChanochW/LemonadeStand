@@ -1,0 +1,14 @@
+extends template
+
+block content
+    main#confirmation.text-center.container
+        div
+            h1 #{message}
+            br
+            ul.list-group.list-group-flush
+                li.list-group-item.uniform Order: #{orderId}
+                li.list-group-item.uniform Name: #{name}
+                li.list-group-item.uniform Email: #{email}
+                li.list-group-item.uniform Type: #{juice}
+                li.list-group-item.uniform Sweeteners: #{sweetener}
+                li.list-group-item.uniform Quantity: #{quantity}
