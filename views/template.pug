@@ -1,0 +1,30 @@
+doctype html
+html
+    head
+        title #{title}
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Roboto")
+        link(rel="stylesheet", href="/css/bootstrap.css")
+        link(rel="stylesheet", href="/css/template.css")
+        block links
+    body
+        nav.navbar.navbar-expand-lg.bg-dark.fixed-top
+            .container-fluid
+                a.navbar-brand(href='#')
+                    img.logo(src='/super_good_looking_lemon.png', alt='Lemon!')
+                button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarNavAltMarkup', aria-controls='navbarNavAltMarkup', aria-expanded='false', aria-label='Toggle navigation')
+                    span
+                        img.logo(src='/icons8-menu-60.png', alt='Menu!')
+                #navbarNavAltMarkup.collapse.navbar-collapse
+                    .navbar-nav
+                        a.nav-link.active.text-light(aria-current='page', href='home') Home
+                        a.nav-link.text-light(href='order') Order
+                        a.nav-link.text-light(href='contact') Contact Us
+        block content
+    footer
+        #signed_ending
+            hr
+            p  &copy; 2023 - Lemonade Stand
+            p
+                a(href='contact') Contact Us
+        script(type="text/javascript" src="/js/bootstrap.bundle.js")
