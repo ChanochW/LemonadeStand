@@ -1,0 +1,60 @@
+.logo {
+    width: 2em;
+}
+
+#loginForm {
+    max-width: 30em;
+}
+
+#signed_ending {
+    text-align: center;
+}
+
+footer {
+    margin-top: auto;
+}
+footer hr {
+    margin: 0 0 2em 0;
+}
+
+#confirmation {
+    max-width: 30em;
+    align-content: center;
+}
+
+.uniform {
+    background-color: gray;
+}
+
+body {
+    background-color: darkgray;
+    min-height: 100vh;
+    flex-direction: column;
+    display: flex;
+}
+
+main {
+    margin-bottom: 2em;
+    margin-top: 6em;
+    /*margin-bottom: 15vh;*/
+}
+footer {
+    /*height: 12vh;*/
+    margin-top: auto;
+}
+footer hr {
+    margin: 0 0 2em 0;
+}
+.navbar-toggler-icon {
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: middle;
+    background-image: url("data:/public/menu_selector_white.png");!important;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+#send {
+    background-color: #fff534;
+}
