@@ -1,0 +1,22 @@
+extends template
+
+block content
+    #carouselExampleAutoplaying.carousel.slide(data-bs-ride='carousel')
+        .carousel-inner
+            .carousel-item.active
+                img.d-block.w-100(src='/lemonade1.jpg', alt='lemonade1')
+            .carousel-item.active
+                img.d-block.w-100(src='/lemonade2.jpg', alt='lemonade2')
+            .carousel-item.active
+                img.d-block.w-100(src='/lemonade3.jpg', alt='lemonade3')
+            .carousel-item.active
+                img.d-block.w-100(src='/lemonade4.jpg', alt='lemonade4')
+            .carousel-item.active
+                img.d-block.w-100(src='/lemonade5.jpg', alt='lemonade5')
+        button.carousel-control-prev(type='button', data-bs-target='#carouselExampleAutoplaying', data-bs-slide='prev')
+            span.carousel-control-prev-icon(aria-hidden='true')
+            span.visually-hidden Previous
+        button.carousel-control-next(type='button', data-bs-target='#carouselExampleAutoplaying', data-bs-slide='next')
+            span.carousel-control-next-icon(aria-hidden='true')
+            span.visually-hidden Next
+
