@@ -10,6 +10,9 @@ block content
                 if (message === "Please use a valid email!")
                     div.alert.alert-danger.text-center
                         p #{message}
+                if (message === "Error submitting the order!")
+                    div.alert.alert-danger.text-center
+                        p #{message}
 
             form(action='order', method='post')
                 h1.h3.mb-3.fw-normal.text-center Order

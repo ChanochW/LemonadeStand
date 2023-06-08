@@ -128,51 +128,57 @@ app.post('/order', (req, res) => {
         pool.getConnection((err, connection) => {
             if (err) {
                 console.error('Error establishing a database connection:', err);
-                return res.status(500).send('Error submitting the order');
-            }
+                res.render('order', {
+                    title: "Order",
+                    message: "Error submitting the order!"
+                })
+            } else {
+                connection.execute(
+                    'INSERT INTO lemonadestand.orders (Name, Username, Juice, Sweetener, Quantity) VALUES (?, ?, ?, ?, ?)',
+                    [name, email, juice, sweetener, quantity],
+                    (error, results) => {
+                        connection.release();
 
-            connection.execute(
-                'INSERT INTO lemonadestand.orders (Name, Username, Juice, Sweetener, Quantity) VALUES (?, ?, ?, ?, ?)',
-                [name, email, juice, sweetener, quantity],
-                (error, results) => {
-                    connection.release();
+                        if (error) {
+                            console.error('Error inserting into the database:', error);
+                            res.render('order', {
+                                title: "Order",
+                                message: "Error submitting the order!"
+                            })
+                        } else {
+                            let orderNum = results.insertId;
 
-                    if (error) {
-                        console.error('Error inserting into the database:', error);
-                        res.status(500).send('Error submitting the order');
-                    } else {
-                        let orderNum = results.insertId;
+                            var transporter = nodemailer.createTransport({
+                                service: 'gmail',
+                                auth: {
+                                    user: user,
+                                    pass: pass
+                                }
+                            });
 
-                        var transporter = nodemailer.createTransport({
-                            service: 'gmail',
-                            auth: {
-                                user: user,
-                                pass: pass
-                            }
-                        });
+                            var mailOptions = {
+                                from: req.body.username,
+                                to: user,
+                                subject: 'New Order {ORDER NUMBER: ' + orderNum + '}',
+                                text: "New Order:\nJuice: " + juice + "\nSweetener: " + sweetener + "\nAmount: " + quantity + "\nFrom: " +
+                                    email + "\nName: " + name + "\nMessage: " + comments,
+                            };
 
-                        var mailOptions = {
-                            from: req.body.username,
-                            to: user,
-                            subject: 'New Order {ORDER NUMBER: ' + orderNum + '}',
-                            text: "New Order:\nJuice: " + juice + "\nSweetener: " + sweetener + "\nAmount: " + quantity + "\nFrom: " +
-                                email + "\nName: " + name + "\nMessage: " + comments,
-                        };
+                            transporter.sendMail(mailOptions, function (error, info) {
+                                if (error) {
+                                    console.log(error);
+                                } else {
+                                    console.log('Email sent: ' + info.response);
+                                }
+                            });
 
-                        transporter.sendMail(mailOptions, function(error, info){
-                            if (error) {
-                                console.log(error);
-                            } else {
-                                console.log('Email sent: ' + info.response);
-                            }
-                        });
+                            console.log('Order inserted into the database');
 
-                        console.log('Order inserted into the database');
-
-                        showOrder(res, orderNum)
+                            showOrder(res, orderNum)
+                        }
                     }
-                }
-            );
+                );
+            }
         });
     }
 });
